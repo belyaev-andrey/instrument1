@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://instrumentOneProposalDataEdit.caption"
+        focusComponent="form"
+        messagesPack="com.eth.instrument1.web.screens.instrumentoneproposaldata">
+    <data>
+        <instance id="instrumentOneProposalDataDc"
+                  class="com.eth.instrument1.entity.InstrumentOneProposalData">
+            <view extends="_local">
+                <property name="proposal" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="proposalsDc" class="com.eth.proposals.entity.Proposal" view="_minimal">
+            <loader id="proposalsDl">
+                <query>
+                    <![CDATA[select e from proposals_Proposal e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="instrumentOneProposalDataDc">
+            <column width="350px">
+                <lookupPickerField id="proposalField" optionsContainer="proposalsDc" property="proposal"/>
+                <textField id="moneyAmountField" property="moneyAmount"/>
+                <textArea id="shortDescriptionField" property="shortDescription" rows="5"/>
+                <dateField id="proposedDeadlineField" property="proposedDeadline"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
